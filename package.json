@@ -1,0 +1,22 @@
+{
+  "name": "naif-card",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Naif Card — بطاقة تعارف رقمية تُفتح عبر NFC",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
+  "dependencies": {
+    "@paper-design/shaders-react": "0.0.82",
+    "@tabler/icons": "^3.50.0",
+    "glisse": "^0.5.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@fontsource/ibm-plex-sans-arabic": "^5.0.0",
+    "esbuild": "^0.25.0",
+    "qrcode": "^1.5.4"
+  }
+}
