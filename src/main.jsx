@@ -143,8 +143,10 @@ function FlipCard({ t }) {
               <small className="qrnote">{t.qrNote}</small>
             </div>
           </div>
-          <Glass className="flipbtn" aria-pressed={back} {...press((e) => { e.stopPropagation(); flip(); })}>
-            <Icon svg={back ? icBack : icQr} size={15} stroke={1.8} />{back ? t.back : t.showQr}
+          <Glass className="flipbtn">
+            <button type="button" className="hit" aria-pressed={back} onClick={(e) => { e.stopPropagation(); flip(); }}>
+              <Icon svg={back ? icBack : icQr} size={15} stroke={1.8} />{back ? t.back : t.showQr}
+            </button>
           </Glass>
         </Glass>
       </div>
@@ -160,6 +162,10 @@ function Card() {
   const [sys, setSys] = React.useState(sysDark.matches ? "dark" : "light");
   React.useEffect(() => { const f = (e) => setSys(e.matches ? "dark" : "light"); sysDark.addEventListener("change", f); return () => sysDark.removeEventListener("change", f); }, []);
   const theme = mode === "auto" ? sys : mode;
+  const reduceMotion = React.useMemo(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches, []);
+  const [visible, setVisible] = React.useState(!document.hidden);
+  React.useEffect(() => { const f = () => setVisible(!document.hidden); document.addEventListener("visibilitychange", f); return () => document.removeEventListener("visibilitychange", f); }, []);
+  const meshSpeed = reduceMotion || !visible ? 0 : 0.35;
   const t = T[lang];
   React.useEffect(() => {
     const h = document.documentElement;
@@ -182,15 +188,21 @@ function Card() {
   return (
     <>
       <div className={`wall wall-${theme}`} aria-hidden="true">
-        <MeshGradient style={{ width: "100%", height: "100%" }} colors={MESH[theme]} distortion={0.8} swirl={0.25} speed={0.35} />
+        <MeshGradient style={{ width: "100%", height: "100%" }} colors={MESH[theme]} distortion={0.8} swirl={0.25} speed={meshSpeed} />
       </div>
     <main className={`app theme-${theme}`} dir={t.dir} lang={lang}>
 
       <div className="topbar" dir="rtl">
-        <Glass className="tbtn round lang" aria-label={t.langAria} title={t.langAria} {...press(toggleLang)}>
-          <span key={lang} className="lg" aria-hidden="true" dangerouslySetInnerHTML={{ __html: `<svg viewBox="0 0 24 24" width="24" height="24">${lang === "ar" ? LANG_EN : LANG_AR}</svg>` }} />
+        <Glass className="tbtn round lang">
+          <button type="button" className="hit" aria-label={t.langAria} title={t.langAria} onClick={toggleLang}>
+            <span key={lang} className="lg" aria-hidden="true" dangerouslySetInnerHTML={{ __html: `<svg viewBox="0 0 24 24" width="24" height="24">${lang === "ar" ? LANG_EN : LANG_AR}</svg>` }} />
+          </button>
         </Glass>
-        <Glass className="tbtn round mode" aria-label={`${t.modeLbl}: ${t.modes[mode]}. ${t.modeHint}`} title={`${t.modeLbl}: ${t.modes[mode]}`} {...press(cycleMode)}><span key={mode} className="mi"><Icon svg={MODE_ICON[mode]} size={20} stroke={1.8} /></span></Glass>
+        <Glass className="tbtn round mode">
+          <button type="button" className="hit" aria-label={`${t.modeLbl}: ${t.modes[mode]}. ${t.modeHint}`} title={`${t.modeLbl}: ${t.modes[mode]}`} onClick={cycleMode}>
+            <span key={mode} className="mi"><Icon svg={MODE_ICON[mode]} size={20} stroke={1.8} /></span>
+          </button>
+        </Glass>
       </div>
 
       <div className="layout">
@@ -201,7 +213,7 @@ function Card() {
         <div className="qrtext"><b>{t.deskQrTitle}</b><small>{t.deskQrSub}</small></div>
       </Glass>
 
-      <Glass className="cta" {...press(() => saveContact(lang))}><Icon svg={icSave} size={22} stroke={1.9} />{t.save}</Glass>
+      <Glass className="cta"><button type="button" className="hit" onClick={() => saveContact(lang)}><Icon svg={icSave} size={22} stroke={1.9} />{t.save}</button></Glass>
 
       <nav className="acts" dir="rtl" aria-label={t.nav}>
         {acts.map((a) => (

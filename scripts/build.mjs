@@ -47,7 +47,7 @@ const css = out.outputFiles.find((f) => f.path.endsWith(".css")).text;
 const fontDir = require.resolve("@fontsource/ibm-plex-sans-arabic/package.json").replace("package.json", "files/");
 let fonts = "";
 for (const [subset, range] of [["arabic", "U+0600-06FF,U+0750-077F,U+0870-08FF,U+FB50-FDFF,U+FE70-FEFF,U+200C-200E"], ["latin", "U+0000-00FF,U+2000-206F"]]) {
-  for (const w of [400, 500, 600, 700]) {
+  for (const w of [400, 600, 700]) {
     const b64 = readFileSync(`${fontDir}ibm-plex-sans-arabic-${subset}-${w}-normal.woff2`).toString("base64");
     fonts += `@font-face{font-family:"IBM Plex Sans Arabic";font-weight:${w};font-display:swap;src:url(data:font/woff2;base64,${b64}) format("woff2");unicode-range:${range}}\n`;
   }
@@ -60,7 +60,9 @@ const html = `<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#EAF6F8">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#EAF6F8">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#081C24">
+<script>(function(){try{var q=new URLSearchParams(location.search),m=q.get("theme")||localStorage.getItem("nc-theme")||"auto",d=m==="dark"||(m!=="light"&&matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.dataset.theme=d?"dark":"light";}catch(e){}})();</script>
 <title>نايف بن سعيد الزهراني</title>
 <meta name="description" content="متخصص في القطاع غير الربحي والتنمية المجتمعية">
 <meta property="og:title" content="نايف بن سعيد الزهراني">
