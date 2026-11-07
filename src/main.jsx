@@ -37,6 +37,7 @@ const T = {
     bio: "مهتم بالإدارة غير الربحية، والتنمية المجتمعية، والتقنية والذكاء الاصطناعي.",
     phoneLbl: "الجوال", emailLbl: "البريد", showQr: "عرض رمز QR", back: "رجوع",
     qrNote: "امسح الرمز لفتح البطاقة",
+    devBy: "تم التطوير بواسطة", dev: "نايف العامر",
     deskQrTitle: "احفظ البطاقة في جوالك", deskQrSub: "امسح الرمز بكاميرا الجوال لفتح البطاقة وحفظ جهة الاتصال", save: "حفظ جهة الاتصال",
     call: "اتصال", wa: "واتساب", mail: "البريد", nav: "وسائل التواصل",
     copiedPhone: "تم نسخ رقم الجوال", copiedEmail: "تم نسخ البريد", copy: "نسخ",
@@ -51,6 +52,7 @@ const T = {
     bio: "Interested in nonprofit management, community development, technology, and AI.",
     phoneLbl: "Mobile", emailLbl: "Email", showQr: "Show QR code", back: "Back",
     qrNote: "Scan to open this card",
+    devBy: "Developed by", dev: "Naif Al-Amer",
     deskQrTitle: "Take this card to your phone", deskQrSub: "Scan with your phone camera to open the card and save the contact", save: "Save Contact",
     call: "Call", wa: "WhatsApp", mail: "Email", nav: "Contact options",
     copiedPhone: "Phone number copied", copiedEmail: "Email copied", copy: "Copy",
@@ -177,6 +179,7 @@ function Card() {
     { k: "x", label: "X", href: X_URL, icon: icX, ext: true },
   ];
   return (
+    <>
     <main className={`app theme-${theme}`} dir={t.dir} lang={lang}>
       <div className="wall" aria-hidden="true">
         <MeshGradient style={{ width: "100%", height: "100%" }} colors={MESH[theme]} distortion={0.8} swirl={0.25} speed={0.35} />
@@ -210,6 +213,10 @@ function Card() {
       </div>
       </div>
     </main>
+    <footer className={`app-foot theme-${theme} foot-wrap`} dir={t.dir} lang={lang}>
+      <div className="foot"><div className="fl" /><p>{t.devBy} <b>{t.dev}</b></p><small>Naif Card © 2026</small></div>
+    </footer>
+    </>
   );
 }
 

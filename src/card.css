@@ -1,8 +1,8 @@
 *{box-sizing:border-box;margin:0;padding:0}
-html,body,#root{height:100%}
+html,body{min-height:100%}
 html{background:#EAF6F8}
 html[data-theme="dark"]{background:#081C24}
-body{font-family:"IBM Plex Sans Arabic",system-ui,sans-serif;line-height:1.6;overflow:hidden;-webkit-text-size-adjust:100%;background:transparent}
+body{font-family:"IBM Plex Sans Arabic",system-ui,sans-serif;line-height:1.6;overflow-x:hidden;-webkit-text-size-adjust:100%;background:transparent}
 a{color:inherit;text-decoration:none}
 button{font:inherit;border:0;cursor:pointer;background:none;color:inherit}
 svg{display:block;flex-shrink:0}
@@ -10,19 +10,19 @@ svg{display:block;flex-shrink:0}
 .tic{display:inline-grid;place-items:center;line-height:0}
 
 /* ===== الألوان: فاتح ===== */
-.app{
+.app,.app-foot{
   --fg:#0F172A; --muted:#334155; --sub:#4B5869; --primary:#0E7490; --line:rgb(14 116 144 / .16);
   --panel:rgb(255 255 255 / .72); --chip:rgb(255 255 255 / .6); --tile:rgb(255 255 255 / .55);
-  --wall-bg:#EAF6F8; --ic:#0E7490; --ring:#FFFFFF; --cp:#64748B; --toast-bg:#0F172A; --toast-fg:#FFFFFF; --focus:#0E7490;
+  --wall-bg:#EAF6F8; --qr-bg:#FFFFFF; --qr-dot:#0E7490; --qr-eye:#0E7490; --qr-eye2:#0B4F61; --qr-logo:#0E6A82; --qr-logo-fg:#FFFFFF; --ic:#0E7490; --ring:#FFFFFF; --cp:#64748B; --toast-bg:#0F172A; --toast-fg:#FFFFFF; --focus:#0E7490;
   --lg-foreground:var(--fg); --lg-glass:var(--tile); --lg-glass-active:rgb(255 255 255 / .75);
   --lg-edge:rgb(255 255 255 / .7); --lg-drop:rgb(15 23 42 / .08); --lg-rim-shine:.4; --lg-blur:14px;
   --lg-glass-bend:.35; --lg-glass-dispersion:0;
 }
 /* ===== الألوان: داكن ===== */
-.app.theme-dark{
+.app.theme-dark,.app-foot.theme-dark{
   --fg:#E6F4F7; --muted:#A9C2CA; --sub:#8AA6AF; --primary:#67D4E6; --line:rgb(103 212 230 / .18);
   --panel:rgb(8 28 36 / .58); --chip:rgb(255 255 255 / .08); --tile:rgb(255 255 255 / .07);
-  --wall-bg:#081C24; --ic:#FFFFFF; --ring:#0B2730; --cp:#9FB6BD; --toast-bg:#E6F4F7; --toast-fg:#06141B; --focus:#67D4E6;
+  --wall-bg:#081C24; --qr-bg:#0A222B; --qr-dot:#7FDDEB; --qr-eye:#A5ECF5; --qr-eye2:#E6F4F7; --qr-logo:#67D4E6; --qr-logo-fg:#0A222B; --ic:#FFFFFF; --ring:#0B2730; --cp:#9FB6BD; --toast-bg:#E6F4F7; --toast-fg:#06141B; --focus:#67D4E6;
   --lg-glass-active:rgb(255 255 255 / .14); --lg-edge:rgb(255 255 255 / .14); --lg-drop:rgb(0 0 0 / .3); --lg-rim-shine:.13;
 }
 :focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:14px}
@@ -80,7 +80,9 @@ svg{display:block;flex-shrink:0}
 
 /* الوجه الخلفي */
 .qrbox{width:clamp(150px,26dvh,210px);aspect-ratio:1;border-radius:18px;--lg-glass:var(--chip);padding:8px}
-.qrbox .qr{display:block;width:100%;height:100%;padding:10px;border-radius:12px;background:#fff}
+.qrbox .qr{display:block;width:100%;height:100%;padding:10px;border-radius:12px;background:var(--qr-bg)}
+.qd{fill:var(--qr-dot)}.qe{stroke:var(--qr-eye)}.qi{fill:var(--qr-eye2)}.qb{fill:var(--qr-bg)}.ql{fill:var(--qr-logo)}.qt{fill:var(--qr-logo-fg)}
+.theme-dark .qrbox .qr,.theme-dark .qrplate{box-shadow:inset 0 0 0 1px rgb(127 221 235 / .18)}
 .qrbox .qr svg{display:block;width:100%;height:100%}
 .qrnote{font-size:12.5px;color:var(--muted);font-weight:600;margin-top:4px}
 
@@ -101,7 +103,7 @@ svg{display:block;flex-shrink:0}
 .act .ic{--icz:clamp(22px,3.7dvh,26px);width:100%;aspect-ratio:1;max-width:clamp(56px,10dvh,68px);max-height:clamp(56px,10dvh,68px);margin-inline:auto;border-radius:21px;display:grid;place-items:center;color:var(--ic);--lg-glass:var(--tile);transition:transform 140ms}
 .act .ic svg{width:var(--icz);height:var(--icz)}
 .act:active .ic{transform:scale(.96)}
-.act>span{max-width:100%;overflow:visible;font-size:clamp(11.5px,3.4vw,12.5px);font-weight:600;line-height:1.2;white-space:nowrap;color:var(--fg)}
+.act>span{max-width:100%;overflow:visible;font-size:clamp(11.5px,3.4vw,12.5px);font-weight:600;line-height:1.2;white-space:nowrap;color:var(--ic)}
 
 .toast{position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom));transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:10;
   display:flex;align-items:center;gap:6px;font-family:"IBM Plex Sans Arabic",system-ui,sans-serif;font-size:13.5px;font-weight:600;padding:9px 16px;border-radius:99px;transition:opacity 180ms,transform 180ms;
@@ -110,6 +112,13 @@ html[data-theme="dark"] .toast{background:#E6F4F7;color:#06141B}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 
 .layout,.side{display:contents}
+/* الحاشية السفلية: تظهر عند النزول تحت البطاقة */
+.app-foot{position:relative;z-index:1}
+.foot{max-width:480px;margin:0 auto;padding:clamp(48px,14dvh,120px) 20px max(28px,env(safe-area-inset-bottom));text-align:center;color:var(--sub)}
+.foot .fl{height:1px;width:56px;margin:0 auto 18px;background:var(--line)}
+.foot p{font-size:13.5px;font-weight:600;color:var(--muted)}
+.foot p b{color:var(--ic);font-weight:700}
+.foot small{display:block;font-size:12px;margin-top:4px;color:var(--sub)}
 .qrside{display:none}
 
 /* ===== سطح المكتب: بطاقة أفقية بعمودين، ورمز QR ظاهر دائمًا ===== */
@@ -129,7 +138,7 @@ html[data-theme="dark"] .toast{background:#E6F4F7;color:#06141B}
   .copy:hover .ltr{text-decoration:underline;text-underline-offset:4px}
   .flipbtn,.face.back{display:none}
   .qrside{display:flex;align-items:center;gap:22px;padding:22px}
-  .qrplate{width:150px;height:150px;flex-shrink:0;background:#fff;border-radius:16px;padding:12px;box-shadow:0 0 0 1px var(--line)}
+  .qrplate{width:150px;height:150px;flex-shrink:0;background:var(--qr-bg);border-radius:16px;padding:12px;box-shadow:0 0 0 1px var(--line)}
   .qrplate svg{display:block;width:100%;height:100%}
   .qrtext b{display:block;font-size:17px;line-height:1.4}
   .qrtext small{display:block;font-size:14px;color:var(--muted);line-height:1.6;margin-top:6px}

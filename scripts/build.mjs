@@ -22,14 +22,14 @@ function brandedQR(text) {
     dots += `<circle cx="${x + 0.5}" cy="${y + 0.5}" r="0.43"/>`;
   }
   const eye = (x, y) =>
-    `<rect x="${x + 0.5}" y="${y + 0.5}" width="6" height="6" rx="1.9" fill="none" stroke="#0E7490" stroke-width="1"/>` +
-    `<rect x="${x + 2}" y="${y + 2}" width="3" height="3" rx="0.9" fill="#0B4F61"/>`;
+    `<rect class="qe" x="${x + 0.5}" y="${y + 0.5}" width="6" height="6" rx="1.9" fill="none" stroke-width="1"/>` +
+    `<rect class="qi" x="${x + 2}" y="${y + 2}" width="3" height="3" rx="0.9"/>`;
   const eyes = eye(0, 0) + eye(n - 7, 0) + eye(0, n - 7);
   const logo =
-    `<circle cx="${c}" cy="${c}" r="${logoR + 0.5}" fill="#fff"/>` +
-    `<circle cx="${c}" cy="${c}" r="${logoR}" fill="#0E6A82"/>` +
-    `<text x="${c}" y="${c + logoR * 0.38}" text-anchor="middle" font-family="IBM Plex Sans Arabic, sans-serif" font-weight="700" font-size="${logoR * 1.15}" fill="#fff">ن</text>`;
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${n} ${n}" shape-rendering="geometricPrecision"><g fill="#0E7490">${dots}</g>${eyes}${logo}</svg>`;
+    `<circle class="qb" cx="${c}" cy="${c}" r="${logoR + 0.5}"/>` +
+    `<circle class="ql" cx="${c}" cy="${c}" r="${logoR}"/>` +
+    `<text x="${c}" y="${c + logoR * 0.38}" text-anchor="middle" font-family="IBM Plex Sans Arabic, sans-serif" font-weight="700" font-size="${logoR * 1.15}" class="qt">ن</text>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${n} ${n}" shape-rendering="geometricPrecision"><g class="qd">${dots}</g>${eyes}${logo}</svg>`;
 }
 const qr = brandedQR(CARD_URL);
 writeFileSync("src/qr.js", `// مُولَّد تلقائيًا من scripts/build.mjs\nexport const CARD_URL = ${JSON.stringify(CARD_URL)};\nexport const QR_SVG = ${JSON.stringify(qr)};\n`);
