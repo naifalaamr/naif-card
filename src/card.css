@@ -1,7 +1,8 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body,#root{height:100%}
-body{font-family:"IBM Plex Sans Arabic",system-ui,sans-serif;line-height:1.6;overflow:hidden;-webkit-text-size-adjust:100%;background:#F5F9FA}
-html[data-theme="dark"] body{background:#06141B}
+html{background:#EAF6F8}
+html[data-theme="dark"]{background:#081C24}
+body{font-family:"IBM Plex Sans Arabic",system-ui,sans-serif;line-height:1.6;overflow:hidden;-webkit-text-size-adjust:100%;background:transparent}
 a{color:inherit;text-decoration:none}
 button{font:inherit;border:0;cursor:pointer;background:none;color:inherit}
 svg{display:block;flex-shrink:0}
@@ -12,7 +13,7 @@ svg{display:block;flex-shrink:0}
 .app{
   --fg:#0F172A; --muted:#334155; --sub:#4B5869; --primary:#0E7490; --line:rgb(14 116 144 / .16);
   --panel:rgb(255 255 255 / .72); --chip:rgb(255 255 255 / .6); --tile:rgb(255 255 255 / .55);
-  --ic:#0E7490; --ring:#FFFFFF; --cp:#64748B; --toast-bg:#0F172A; --toast-fg:#FFFFFF; --focus:#0E7490;
+  --wall-bg:#EAF6F8; --ic:#0E7490; --ring:#FFFFFF; --cp:#64748B; --toast-bg:#0F172A; --toast-fg:#FFFFFF; --focus:#0E7490;
   --lg-foreground:var(--fg); --lg-glass:var(--tile); --lg-glass-active:rgb(255 255 255 / .75);
   --lg-edge:rgb(255 255 255 / .7); --lg-drop:rgb(15 23 42 / .08); --lg-rim-shine:.4; --lg-blur:14px;
   --lg-glass-bend:.35; --lg-glass-dispersion:0;
@@ -21,7 +22,7 @@ svg{display:block;flex-shrink:0}
 .app.theme-dark{
   --fg:#E6F4F7; --muted:#A9C2CA; --sub:#8AA6AF; --primary:#67D4E6; --line:rgb(103 212 230 / .18);
   --panel:rgb(8 28 36 / .58); --chip:rgb(255 255 255 / .08); --tile:rgb(255 255 255 / .07);
-  --ic:#FFFFFF; --ring:#0B2730; --cp:#9FB6BD; --toast-bg:#E6F4F7; --toast-fg:#06141B; --focus:#67D4E6;
+  --wall-bg:#081C24; --ic:#FFFFFF; --ring:#0B2730; --cp:#9FB6BD; --toast-bg:#E6F4F7; --toast-fg:#06141B; --focus:#67D4E6;
   --lg-glass-active:rgb(255 255 255 / .14); --lg-edge:rgb(255 255 255 / .14); --lg-drop:rgb(0 0 0 / .3); --lg-rim-shine:.13;
 }
 :focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:14px}
@@ -33,7 +34,7 @@ svg{display:block;flex-shrink:0}
   display:flex;flex-direction:column;justify-content:center;gap:var(--gap);
   padding:max(clamp(14px,3dvh,32px),env(safe-area-inset-top)) 16px max(clamp(14px,2.6dvh,28px),env(safe-area-inset-bottom));
 }
-.wall{position:absolute;inset:0;z-index:-1}
+.wall{position:fixed;left:0;right:0;top:0;height:100lvh;min-height:100%;z-index:-1;background:var(--wall-bg)}
 .wall>*{position:absolute!important;inset:0}
 
 /* أزرار اللغة والوضع */

@@ -32,7 +32,7 @@ const WA = "https://wa.me/966500383626";
 
 const T = {
   ar: {
-    dir: "rtl", name: "نايف سعيد الزهراني", initial: "ن",
+    dir: "rtl", name: "نايف بن سعيد الزهراني", initial: "ن",
     role: "متخصص في القطاع غير الربحي والتنمية المجتمعية",
     bio: "مهتم بالإدارة غير الربحية، والتنمية المجتمعية، والتقنية والذكاء الاصطناعي.",
     phoneLbl: "الجوال", emailLbl: "البريد", showQr: "عرض رمز QR", back: "رجوع",
@@ -41,11 +41,11 @@ const T = {
     copiedPhone: "تم نسخ رقم الجوال", copiedEmail: "تم نسخ البريد", copy: "نسخ",
     photo: "الصورة الشخصية (بديل مؤقت)", langBtn: "English", langAria: "Switch to English",
     modeLbl: "المظهر", modes: { auto: "تلقائي", light: "فاتح", dark: "داكن" }, modeHint: "اضغط للتغيير",
-    vN: "الزهراني;نايف سعيد;;;",
+    vN: "الزهراني;نايف;بن سعيد;;",
   },
   en: {
     // ⚠️ التهجئة الإنجليزية للاسم بانتظار تأكيد نايف
-    dir: "ltr", name: "Naif Saeed Alzahrani", initial: "N",
+    dir: "ltr", name: "Naif bin Saeed Alzahrani", initial: "N",
     role: "Nonprofit Sector & Community Development Specialist",
     bio: "Interested in nonprofit management, community development, technology, and AI.",
     phoneLbl: "Mobile", emailLbl: "Email", showQr: "Show QR code", back: "Back",
@@ -54,7 +54,7 @@ const T = {
     copiedPhone: "Phone number copied", copiedEmail: "Email copied", copy: "Copy",
     photo: "Profile photo (placeholder)", langBtn: "عربي", langAria: "التبديل إلى العربية",
     modeLbl: "Appearance", modes: { auto: "Automatic", light: "Light", dark: "Dark" }, modeHint: "Tap to change",
-    vN: "Alzahrani;Naif Saeed;;;",
+    vN: "Alzahrani;Naif;bin Saeed;;",
   },
 };
 
@@ -161,7 +161,7 @@ function Card() {
     h.lang = lang; h.dir = t.dir; h.dataset.theme = theme;
     h.style.colorScheme = theme;
     document.title = t.name;
-    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#06141B" : "#E0F7FA");
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#081C24" : "#EAF6F8");
   }, [lang, theme]);
   const toggleLang = () => { const n = lang === "ar" ? "en" : "ar"; setLang(n); store.set("nc-lang", n); };
   const NEXT = { auto: "light", light: "dark", dark: "auto" };
