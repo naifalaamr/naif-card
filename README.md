@@ -38,3 +38,7 @@ GitHub Pages ينشر مجلد `docs/` من فرع `main`.
 | [node-qrcode](https://github.com/soldair/node-qrcode) | توليد رمز QR | MIT |
 
 فكرة قلب البطاقة مستوحاة من Card Flip في [Kokonut UI](https://github.com/kokonut-labs/kokonutui) (MIT).
+
+## صورة المعاينة
+
+`docs/og.jpg` (1200×630) تظهر عند مشاركة الرابط في واتساب وX ولينكدإن. تصميمها في `scripts/og.mjs`.

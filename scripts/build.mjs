@@ -67,6 +67,20 @@ const html = `<!DOCTYPE html>
 <meta property="og:description" content="متخصص في القطاع غير الربحي والتنمية المجتمعية">
 <meta property="og:url" content="${CARD_URL}">
 <meta property="og:type" content="profile">
+<meta property="og:site_name" content="Naif Card">
+<meta property="og:locale" content="ar_SA">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:image" content="${CARD_URL}og.jpg">
+<meta property="og:image:secure_url" content="${CARD_URL}og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="بطاقة نايف بن سعيد الزهراني — متخصص في القطاع غير الربحي والتنمية المجتمعية">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="نايف بن سعيد الزهراني">
+<meta name="twitter:description" content="متخصص في القطاع غير الربحي والتنمية المجتمعية">
+<meta name="twitter:image" content="${CARD_URL}og.jpg">
+<link rel="canonical" href="${CARD_URL}">
 <link rel="icon" href="${favicon}">
 <style>${fonts}${css}</style>
 </head>
