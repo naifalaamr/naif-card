@@ -187,7 +187,7 @@ function Card() {
   ];
   return (
     <>
-      <div className={`wall wall-${theme}`} aria-hidden="true">
+      <div className={`wall wall-${theme}`} aria-hidden="true" data-glisse-backdrop="">
         <MeshGradient style={{ width: "100%", height: "100%" }} colors={MESH[theme]} distortion={0.8} swirl={0.25} speed={meshSpeed} />
       </div>
     <main className={`app theme-${theme}`} dir={t.dir} lang={lang}>
