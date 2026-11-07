@@ -34,8 +34,16 @@ svg{display:block;flex-shrink:0}
   display:flex;flex-direction:column;justify-content:center;gap:var(--gap);
   padding:max(clamp(14px,3dvh,32px),env(safe-area-inset-top)) 16px max(clamp(14px,2.6dvh,28px),env(safe-area-inset-bottom));
 }
-.wall{position:fixed;left:0;right:0;top:0;height:100lvh;min-height:100%;z-index:-1;background:var(--wall-bg)}
+/* الخلفية جزء من الصفحة (ليست مثبّتة على حافة الشاشة) حتى لا يلوّن Safari أشرطته بلون سادة منها،
+   وأطرافها تذوب في لون الصفحة نفسه فتندمج مع أشرطة المتصفح أيًّا كان لونها */
+#root{position:relative;min-height:100lvh}
+.wall{position:absolute;inset:0;z-index:-1;overflow:hidden}
+.wall-light{--edge:#EAF6F8;background:#EAF6F8}
+.wall-dark{--edge:#081C24;background:#081C24}
 .wall>*{position:absolute!important;inset:0}
+.wall::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(to bottom,var(--edge) 0,transparent clamp(90px,14vh,150px),transparent calc(100% - clamp(110px,16vh,170px)),var(--edge) 100%)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* أزرار اللغة والوضع */
 .topbar{position:absolute;top:max(10px,env(safe-area-inset-top));inset-inline:12px;display:flex;justify-content:space-between;z-index:5;pointer-events:none}
@@ -105,11 +113,11 @@ svg{display:block;flex-shrink:0}
 .act:active .ic{transform:scale(.96)}
 .act>span{max-width:100%;overflow:visible;font-size:clamp(11.5px,3.4vw,12.5px);font-weight:600;line-height:1.2;white-space:nowrap;color:var(--ic)}
 
-.toast{position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom));transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:10;
+.toast{position:fixed;left:50%;bottom:max(84px,calc(env(safe-area-inset-bottom) + 70px));transform:translate(-50%,0);pointer-events:none;z-index:10;animation:toastIn 180ms ease-out;
   display:flex;align-items:center;gap:6px;font-family:"IBM Plex Sans Arabic",system-ui,sans-serif;font-size:13.5px;font-weight:600;padding:9px 16px;border-radius:99px;transition:opacity 180ms,transform 180ms;
   background:#0F172A;color:#fff}
 html[data-theme="dark"] .toast{background:#E6F4F7;color:#06141B}
-.toast.show{opacity:1;transform:translate(-50%,0)}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,16px)}to{opacity:1;transform:translate(-50%,0)}}
 
 .layout,.side{display:contents}
 /* الحاشية السفلية: تظهر عند النزول تحت البطاقة */

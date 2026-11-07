@@ -148,7 +148,8 @@ function FlipCard({ t }) {
           </Glass>
         </Glass>
       </div>
-      {createPortal(<div className={`toast${copied ? " show" : ""}`} role="status" aria-live="polite">{copied && <><Icon svg={icCheck} size={16} stroke={2} />{copied}</>}</div>, document.body)}
+      <span className="sr" role="status" aria-live="polite">{copied}</span>
+      {copied && createPortal(<div key={copied + Date.now()} className="toast" aria-hidden="true"><Icon svg={icCheck} size={16} stroke={2} />{copied}</div>, document.body)}
     </div>
   );
 }
@@ -180,10 +181,10 @@ function Card() {
   ];
   return (
     <>
-    <main className={`app theme-${theme}`} dir={t.dir} lang={lang}>
-      <div className="wall" aria-hidden="true">
+      <div className={`wall wall-${theme}`} aria-hidden="true">
         <MeshGradient style={{ width: "100%", height: "100%" }} colors={MESH[theme]} distortion={0.8} swirl={0.25} speed={0.35} />
       </div>
+    <main className={`app theme-${theme}`} dir={t.dir} lang={lang}>
 
       <div className="topbar" dir="rtl">
         <Glass className="tbtn round lang" aria-label={t.langAria} title={t.langAria} {...press(toggleLang)}>
