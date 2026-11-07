@@ -26,11 +26,10 @@ function brandedQR(text) {
     `<rect x="${x + 2}" y="${y + 2}" width="3" height="3" rx="0.9" fill="#0B4F61"/>`;
   const eyes = eye(0, 0) + eye(n - 7, 0) + eye(0, n - 7);
   const logo =
-    `<defs><linearGradient id="qg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E7490"/><stop offset="1" stop-color="#164E63"/></linearGradient></defs>` +
     `<circle cx="${c}" cy="${c}" r="${logoR + 0.5}" fill="#fff"/>` +
-    `<circle cx="${c}" cy="${c}" r="${logoR}" fill="url(#qg)"/>` +
+    `<circle cx="${c}" cy="${c}" r="${logoR}" fill="#0E6A82"/>` +
     `<text x="${c}" y="${c + logoR * 0.38}" text-anchor="middle" font-family="IBM Plex Sans Arabic, sans-serif" font-weight="700" font-size="${logoR * 1.15}" fill="#fff">ن</text>`;
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${n} ${n}" shape-rendering="geometricPrecision">${logo.split("</defs>")[0]}</defs><g fill="#0E7490">${dots}</g>${eyes}${logo.split("</defs>")[1]}</svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${n} ${n}" shape-rendering="geometricPrecision"><g fill="#0E7490">${dots}</g>${eyes}${logo}</svg>`;
 }
 const qr = brandedQR(CARD_URL);
 writeFileSync("src/qr.js", `// مُولَّد تلقائيًا من scripts/build.mjs\nexport const CARD_URL = ${JSON.stringify(CARD_URL)};\nexport const QR_SVG = ${JSON.stringify(qr)};\n`);
@@ -83,7 +82,7 @@ const PHONE = "+966500383626", EMAIL = "n4if.017@gmail.com";
 const URLS = ["https://www.linkedin.com/in/naif-al-amer-2b200b192/", "https://x.com/naifalaamr", CARD_URL];
 const vcards = {
   ar: { n: "الزهراني;نايف;بن سعيد;;", fn: "نايف بن سعيد الزهراني", title: "متخصص في القطاع غير الربحي والتنمية المجتمعية", note: "مهتم بالإدارة غير الربحية، والتنمية المجتمعية، والتقنية والذكاء الاصطناعي." },
-  en: { n: "Alzahrani;Naif;bin Saeed;;", fn: "Naif bin Saeed Alzahrani", title: "Nonprofit Sector & Community Development Specialist", note: "Interested in nonprofit management, community development, technology, and AI." },
+  en: { n: "Alzahrani;Naif;Saeed;;", fn: "Naif Saeed Alzahrani", title: "Nonprofit Sector & Community Development Specialist", note: "Interested in nonprofit management, community development, technology, and AI." },
 };
 for (const [lang, v] of Object.entries(vcards)) {
   const lines = ["BEGIN:VCARD", "VERSION:3.0", `N;CHARSET=UTF-8:${v.n}`, `FN;CHARSET=UTF-8:${v.fn}`, `TITLE;CHARSET=UTF-8:${v.title}`,

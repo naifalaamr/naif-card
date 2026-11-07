@@ -36,7 +36,8 @@ const T = {
     role: "متخصص في القطاع غير الربحي والتنمية المجتمعية",
     bio: "مهتم بالإدارة غير الربحية، والتنمية المجتمعية، والتقنية والذكاء الاصطناعي.",
     phoneLbl: "الجوال", emailLbl: "البريد", showQr: "عرض رمز QR", back: "رجوع",
-    qrNote: "امسح الرمز لفتح البطاقة", save: "حفظ جهة الاتصال",
+    qrNote: "امسح الرمز لفتح البطاقة",
+    deskQrTitle: "احفظ البطاقة في جوالك", deskQrSub: "امسح الرمز بكاميرا الجوال لفتح البطاقة وحفظ جهة الاتصال", save: "حفظ جهة الاتصال",
     call: "اتصال", wa: "واتساب", mail: "البريد", nav: "وسائل التواصل",
     copiedPhone: "تم نسخ رقم الجوال", copiedEmail: "تم نسخ البريد", copy: "نسخ",
     photo: "الصورة الشخصية (بديل مؤقت)", langBtn: "English", langAria: "Switch to English",
@@ -45,16 +46,17 @@ const T = {
   },
   en: {
     // ⚠️ التهجئة الإنجليزية للاسم بانتظار تأكيد نايف
-    dir: "ltr", name: "Naif bin Saeed Alzahrani", initial: "N",
+    dir: "ltr", name: "Naif Saeed Alzahrani", initial: "N",
     role: "Nonprofit Sector & Community Development Specialist",
     bio: "Interested in nonprofit management, community development, technology, and AI.",
     phoneLbl: "Mobile", emailLbl: "Email", showQr: "Show QR code", back: "Back",
-    qrNote: "Scan to open this card", save: "Save Contact",
+    qrNote: "Scan to open this card",
+    deskQrTitle: "Take this card to your phone", deskQrSub: "Scan with your phone camera to open the card and save the contact", save: "Save Contact",
     call: "Call", wa: "WhatsApp", mail: "Email", nav: "Contact options",
     copiedPhone: "Phone number copied", copiedEmail: "Email copied", copy: "Copy",
     photo: "Profile photo (placeholder)", langBtn: "عربي", langAria: "التبديل إلى العربية",
     modeLbl: "Appearance", modes: { auto: "Automatic", light: "Light", dark: "Dark" }, modeHint: "Tap to change",
-    vN: "Alzahrani;Naif;bin Saeed;;",
+    vN: "Alzahrani;Naif;Saeed;;",
   },
 };
 
@@ -187,7 +189,13 @@ function Card() {
         <Glass className="tbtn round mode" aria-label={`${t.modeLbl}: ${t.modes[mode]}. ${t.modeHint}`} title={`${t.modeLbl}: ${t.modes[mode]}`} {...press(cycleMode)}><span key={mode} className="mi"><Icon svg={MODE_ICON[mode]} size={20} stroke={1.8} /></span></Glass>
       </div>
 
+      <div className="layout">
       <FlipCard key={lang} t={t} />
+      <div className="side">
+      <Glass className="panel qrside" aria-hidden="false">
+        <div className="qrplate" role="img" aria-label={`QR: ${CARD_URL}`} dangerouslySetInnerHTML={{ __html: QR_SVG }} />
+        <div className="qrtext"><b>{t.deskQrTitle}</b><small>{t.deskQrSub}</small></div>
+      </Glass>
 
       <Glass className="cta" {...press(() => saveContact(lang))}><Icon svg={icSave} size={22} stroke={1.9} />{t.save}</Glass>
 
@@ -199,6 +207,8 @@ function Card() {
           </a>
         ))}
       </nav>
+      </div>
+      </div>
     </main>
   );
 }

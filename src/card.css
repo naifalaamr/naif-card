@@ -109,5 +109,36 @@ svg{display:block;flex-shrink:0}
 html[data-theme="dark"] .toast{background:#E6F4F7;color:#06141B}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 
+.layout,.side{display:contents}
+.qrside{display:none}
+
+/* ===== سطح المكتب: بطاقة أفقية بعمودين، ورمز QR ظاهر دائمًا ===== */
+@media (min-width:900px) and (min-height:560px){
+  .app{max-width:1060px;padding:48px 40px;--gap:24px}
+  .topbar{inset-inline:24px;top:20px}
+  .layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;align-items:stretch}
+  .side{display:flex;flex-direction:column;gap:20px;justify-content:center}
+  .flipzone{display:flex}
+  .flipper{flex:1;display:flex}
+  .id{flex:1;--s:120px;padding:calc(var(--s)/2 + 22px) 40px 34px;justify-content:center}
+  .name{font-size:34px}
+  .role{font-size:17px}
+  .bio{font-size:16px;max-width:440px;margin-inline:auto}
+  .ct{max-width:380px;margin-top:20px}
+  .copy{font-size:15.5px;cursor:pointer}
+  .copy:hover .ltr{text-decoration:underline;text-underline-offset:4px}
+  .flipbtn,.face.back{display:none}
+  .qrside{display:flex;align-items:center;gap:22px;padding:22px}
+  .qrplate{width:150px;height:150px;flex-shrink:0;background:#fff;border-radius:16px;padding:12px;box-shadow:0 0 0 1px var(--line)}
+  .qrplate svg{display:block;width:100%;height:100%}
+  .qrtext b{display:block;font-size:17px;line-height:1.4}
+  .qrtext small{display:block;font-size:14px;color:var(--muted);line-height:1.6;margin-top:6px}
+  .cta{min-height:60px;cursor:pointer}
+  .cta:hover{--lg-glass:rgb(9 88 108 / .96)}
+  .acts{gap:12px}
+  .act .ic{max-width:72px;max-height:72px;cursor:pointer}
+  .act:hover .ic{transform:translateY(-2px)}
+  .tbtn{cursor:pointer}
+}
 @media (max-height:540px){.app{--gap:10px}.id{--s:58px;padding-bottom:8px;padding-top:calc(var(--s)/2 + 6px)}.ct{margin-top:4px}.flipbtn{margin-top:4px}.role,.bio{font-size:13px;line-height:1.5}.name{font-size:20px}.ct{margin-top:6px}.flipbtn{margin-top:6px}.bio{margin-top:4px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
